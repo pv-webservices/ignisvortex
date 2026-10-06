@@ -1,0 +1,32 @@
+---
+// Horizontal, scroll-snapping product showcase. Native swipe on touch; arrow buttons on desktop.
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import { products } from '../data/site';
+interface Props { exclude?: string; }
+const { exclude } = Astro.props;
+const items = products.filter((p) => p.slug !== exclude);
+---
+<div class="rail" data-rail>
+  <div class="rail-controls">
+    <button type="button" class="rail-btn" data-rail-prev aria-label="Previous products" disabled><Icon name="arrow-left" size={20} /></button>
+    <button type="button" class="rail-btn" data-rail-next aria-label="Next products"><Icon name="arrow" size={20} /></button>
+  </div>
+  <ul class="rail-track" data-rail-track tabindex="0" aria-label="Product categories">
+    {items.map((p, i) => (
+      <li class="rail-item">
+        <a href={`/products/${p.slug}/`} class="product-card">
+          <span class="product-n mono">{String(i + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
+          <div class="product-media zoom"><Img src={p.image} alt={p.alt} sizes="(max-width: 600px) 80vw, 360px" width={1024} height={1024} /></div>
+          <div class="product-body">
+            <span class="product-icon"><Icon name={p.icon} size={20} /></span>
+            <h3>{p.title}</h3>
+            <p>{p.short}</p>
+            <span class="product-link">View category <Icon name="arrow" size={18} /></span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="rail-progress" aria-hidden="true"><span data-rail-bar></span></div>
+</div>

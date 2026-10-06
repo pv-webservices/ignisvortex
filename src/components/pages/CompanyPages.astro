@@ -1,0 +1,65 @@
+---
+import SectionHead from '../SectionHead.astro';
+import LeaderPanel from '../LeaderPanel.astro';
+import WhyUs from '../home/WhyUs.astro';
+import Img from '../Img.astro';
+import { leader } from '../../data/site';
+interface Props { path: string; }
+const { path } = Astro.props;
+const philosophy = [
+  ['Understand the context', 'Start with occupancy, jurisdiction, project objectives and authority criteria.'],
+  ['Apply technical judgement', 'Connect codes, modelling and practical engineering experience.'],
+  ['Coordinate early', 'Bring architecture, structure and building systems into the same conversation.'],
+  ['Document clearly', 'Deliver traceable findings and clear technical recommendations.'],
+];
+const jurisdictions = [
+  ['KSA', 'Saudi Arabia', 'Riyadh office. Saudi Building Code (SBC 801), SAES, Aramco LPD/FrPD criteria. Registered with the Saudi Council of Engineers.'],
+  ['UAE', 'United Arab Emirates', 'UAE Fire & Life Safety Code and Dubai Civil Defence approval coordination.'],
+  ['IND', 'India', 'Civil & Structural Design Center. NBC 2016 Part 4 and relevant IS Codes.'],
+  ['USA', 'United States', 'PE licensure — Fire Protection (TX, NY, KY) and Civil (NV, TX, NY, KY). NFPA and IBC.'],
+];
+---
+{path === 'about' && (
+  <>
+    <section class="section">
+      <div class="wrap about-intro">
+        <div>
+          <p class="label reveal">Company overview</p>
+          <h2 class="reveal" style="--d:80ms">Independent thinking. <em>Integrated engineering.</em></h2>
+        </div>
+        <div class="about-copy">
+          <p class="lead reveal">We are an independent engineering consultancy specialising in Fire Protection Engineering, Life Safety Strategy, Civil Utilities and Third-Party Audits.</p>
+          <p class="reveal">We serve project owners, lead architects, MEP consultants and main contractors by delivering code-led design, performance-based fire engineering and rigorous compliance oversight — supported by fire safety products, installation and commissioning.</p>
+          <p class="reveal">Our methodology integrates technical code enforcement with commercial awareness. By identifying safety and structural risks during early design phases, we work to eliminate costly re-work, resolve non-conformance reports (NCRs) and support zero-defect handovers to approving authorities.</p>
+        </div>
+      </div>
+      <div class="wrap about-band reveal clip media"><Img src="gen/installation-team" alt="Technicians installing sprinkler pipework and smoke detectors in an open commercial ceiling" sizes="100vw" /></div>
+    </section>
+    <WhyUs />
+    <section class="section paper-2">
+      <div class="wrap">
+        <SectionHead label="Our philosophy" title="Code-led. Performance-informed. <em>Project-aware.</em>" />
+        <ol class="approach">{philosophy.map(([t, d], i) => <li class="reveal" style={`--d:${i * 90}ms`}><span class="approach-n display">0{i + 1}</span><h3>{t}</h3><p>{d}</p></li>)}</ol>
+      </div>
+    </section>
+    <section class="section dark blueprint">
+      <div class="wrap">
+        <SectionHead label="International perspective" title="Local requirements. <em>Global understanding.</em>" text="Project execution and regulatory compliance across four international jurisdictions." split />
+        <div class="juris-grid">
+          {jurisdictions.map(([code, name, text], i) => <div class="juris reveal" style={`--d:${i * 80}ms`}><span class="display">{code}</span><h3>{name}</h3><p>{text}</p></div>)}
+        </div>
+      </div>
+    </section>
+  </>
+)}
+<section class="section">
+  <div class="wrap">
+    {path === 'about' && <SectionHead label="Our leadership" title="Technical depth. <em>Global perspective.</em>" />}
+    <LeaderPanel full={path === 'leadership'} />
+    {path === 'leadership' && (
+      <div class="leader-summary reveal">
+        <p class="lead">{leader.name}, {leader.postnominals} brings a multidisciplinary engineering perspective shaped by fire protection, structural engineering and international project delivery. {leader.saudi}</p>
+      </div>
+    )}
+  </div>
+</section>

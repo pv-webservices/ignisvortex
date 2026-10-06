@@ -1,0 +1,29 @@
+---
+import Img from './Img.astro';
+import Button from './Button.astro';
+import { deliverySteps } from '../data/site';
+interface Props { id?: string; }
+const { id = 'delivery' } = Astro.props;
+---
+<section class="delivery dark" id={id} aria-labelledby={`${id}-title`}>
+  <div class="delivery-media" aria-hidden="true"><Img src="gen/installation-team" alt="" sizes="100vw" /></div>
+  <div class="wrap delivery-inner">
+    <div class="delivery-copy">
+      <p class="label reveal">Supply · Installation · Commissioning</p>
+      <h2 id={`${id}-title`} class="reveal" style="--d:80ms">Engineered, supplied <em>and installed right.</em></h2>
+      <p class="lead reveal" style="--d:160ms">Fire safety equipment is only as good as its design and installation. We connect product selection and installation to the approved fire &amp; life safety strategy — and carry it through testing to handover.</p>
+      <div class="btn-row reveal" style="--d:220ms">
+        <Button href="/contact/?service=Product%20Enquiry" variant="light">Request a Supply &amp; Installation Quote</Button>
+      </div>
+    </div>
+    <ol class="steps" data-steps>
+      {deliverySteps.map((s, i) => (
+        <li class="step reveal" style={`--d:${i * 110}ms`}>
+          <span class="step-n mono">0{i + 1}</span>
+          <h3 class="display">{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import Icon from '../Icon.astro';
+import Img from '../Img.astro';
+import SectionHead from '../SectionHead.astro';
+import Button from '../Button.astro';
+const pillars = [
+  { n: '01', cls: 'p-engineer', href: '/services/', image: 'gen/svc-sprinkler-design', title: 'Engineering & Consultancy', text: 'Fire protection engineering, life safety strategy, code consulting, third-party verification and civil & structural engineering — led by a dual-licensed PE.', tags: ['Performance-based design', 'Life safety audits', 'Design verification', 'PE stamp services'], link: 'Explore practice areas' },
+  { n: '02', cls: 'p-products', href: '/products/', image: 'gen/prod-extinguishers', title: 'Fire Safety Products', text: 'Fire alarm, extinguishers, sprinkler & hydrant, detection, emergency lighting and security systems — selected for the building and its hazards.', tags: [], link: 'Explore products' },
+  { n: '03', cls: 'p-install', href: '/products/#delivery', image: 'gen/installation-team', title: 'Installation & Commissioning', text: 'Installation coordinated with the approved design, followed by testing, witnessing and a documented handover.', tags: [], link: 'How we deliver' },
+];
+---
+<section class="section pillars">
+  <div class="wrap">
+    <SectionHead label="Complete fire safety solutions" title="From code to <em>commissioning.</em>" text="One accountable partner across engineering, equipment and installation — so the system that is designed is the system that is built, tested and handed over." split>
+      <Button href="/request-review/" variant="outline">Discuss Your Project</Button>
+    </SectionHead>
+    <div class="bento">
+      {pillars.map((p, i) => (
+        <a href={p.href} class:list={['bento-tile', p.cls, 'reveal']} style={`--d:${i * 90}ms`}>
+          <div class="bento-media zoom"><Img src={p.image} alt="" sizes={i === 0 ? '(max-width: 900px) 100vw, 58vw' : '(max-width: 900px) 100vw, 42vw'} /></div>
+          <div class="bento-body">
+            <span class="bento-n mono">{p.n}</span>
+            <h3 class="display">{p.title}</h3>
+            <p>{p.text}</p>
+            {p.tags.length > 0 && <ul class="chip-row">{p.tags.map((t) => <li class="chip">{t}</li>)}</ul>}
+            <span class="bento-link">{p.link}<Icon name="arrow-up-right" size={20} /></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

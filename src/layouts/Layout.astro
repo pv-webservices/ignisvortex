@@ -1,0 +1,74 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '../styles/base.css';
+import '../styles/chrome.css';
+import '../styles/sections.css';
+import '../styles/pages.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props { title: string; description: string; schema?: Record<string, unknown>; noindex?: boolean; preload?: string; ogImage?: string; }
+const { title, description, schema, noindex = false, preload, ogImage = '/assets/gen/hero-pump-room.webp' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.domain).href;
+const org = {
+  '@context': 'https://schema.org', '@type': 'ProfessionalService', name: site.name, legalName: site.legal, url: site.domain,
+  logo: `${site.domain}/assets/logo.webp`, image: `${site.domain}${ogImage}`, email: site.email, sameAs: [site.facebook],
+  areaServed: ['Saudi Arabia', 'United Arab Emirates', 'India', 'United States'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressCountry: 'SA' },
+};
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const crumbName = (part: string, index: number) => (index === segments.length - 1 ? title.replace(/\.$/, '') : part.charAt(0).toUpperCase() + part.slice(1).replaceAll('-', ' '));
+const breadcrumbs = segments.length && !noindex ? {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${site.domain}/` },
+    ...segments.map((part, index) => ({ '@type': 'ListItem', position: index + 2, name: crumbName(part, index), item: `${site.domain}/${segments.slice(0, index + 1).join('/')}/` }))],
+} : undefined;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0c1114" />
+  <title>{title} | Ignis Vortex</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex,follow" />}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={`${title} | Ignis Vortex`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${site.domain}${ogImage}`} />
+  <meta property="og:site_name" content="Ignis Vortex" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  {preload && <link rel="preload" as="image" href={`/assets/${preload}.webp`} imagesrcset={`/assets/${preload}-small.webp 720w, /assets/${preload}.webp 1600w`} imagesizes="100vw" fetchpriority="high" />}
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    try { if (!sessionStorage.getItem('iv-visited')) { document.documentElement.classList.add('show-loader'); sessionStorage.setItem('iv-visited', '1'); } } catch (e) { /* storage unavailable: skip loader */ }
+  </script>
+  <script type="application/ld+json" set:html={JSON.stringify(org)} />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...schema })} />}
+  {breadcrumbs && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs)} />}
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <div class="loader-mark">
+      <svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="26" /><path d="M32 12a20 20 0 1 1-19.6 24" /><path d="M32 20a12 12 0 1 1-11.8 14" /></svg>
+      <span class="mono">Ignis Vortex</span>
+    </div>
+    <span class="loader-bar"></span>
+  </div>
+  <Header />
+  <main id="main"><slot /></main>
+  <Footer />
+  <script>
+    import '../scripts/site';
+  </script>
+</body>
+</html>

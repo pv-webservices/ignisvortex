@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { leader } from '../data/site';
+interface Props { full?: boolean; }
+const { full = false } = Astro.props;
+---
+<div class:list={['leader', { full }]}>
+  <div class="leader-id reveal from-left">
+    <div class="leader-plate dark blueprint">
+      <span class="leader-mono display" aria-hidden="true">WM</span>
+      <span class="mono leader-plate-role">{leader.role}</span>
+      <strong class="leader-name display">{leader.name}<span>{leader.postnominals}</span></strong>
+      <ul class="chip-row" aria-label="Board certifications">{leader.certifications.map((c) => <li class="chip">{c}</li>)}</ul>
+    </div>
+    <div class="licence-grid">
+      {leader.licensure.map((l) => (
+        <div class="licence">
+          <p class="mono">PE · {l.discipline}</p>
+          <ul>{l.states.map((st) => <li>{st}</li>)}</ul>
+        </div>
+      ))}
+      <div class="licence">
+        <p class="mono">Registered PE</p>
+        <ul><li>Saudi Council of Engineers</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="leader-detail">
+    <div class="leader-block reveal">
+      <h3><Icon name="book" size={22} />Academic background</h3>
+      <ul class="tick-list">{leader.academic.map((a) => <li><Icon name="check" size={20} />{a}</li>)}</ul>
+    </div>
+    <div class="leader-block reveal" style="--d:80ms">
+      <h3><Icon name="shield" size={22} />Board certifications</h3>
+      <p>{leader.certificationNote}</p>
+    </div>
+    <div class="leader-block reveal" style="--d:120ms">
+      <h3><Icon name="globe" size={22} />Professional fellowships</h3>
+      <ul class="tick-list">{leader.fellowships.map((a) => <li><Icon name="check" size={20} />{a}</li>)}</ul>
+    </div>
+    {full && (
+      <div class="leader-block reveal" style="--d:160ms">
+        <h3><Icon name="building" size={22} />Track record</h3>
+        <ul class="tick-list">{leader.track.map((a) => <li><Icon name="check" size={20} />{a}</li>)}</ul>
+      </div>
+    )}
+    {!full && <div class="reveal"><Button href="/leadership/" variant="outline">View Leadership Profile</Button></div>}
+  </div>
+</div>

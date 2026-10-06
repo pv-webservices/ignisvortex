@@ -1,0 +1,38 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import { programs } from '../../data/site';
+---
+<section class="section">
+  <div class="wrap">
+    <SectionHead label="Professional certification exam preparation" title="Knowledge grounded <em>in engineering practice.</em>" text="Programmes led by a dual-licensed PE holding CFPS, CFPE, CWBSP and CHRS credentials — designed for engineers, consultants and authority personnel." split />
+    <div class="program-grid">
+      {programs.map((p, i) => (
+        <article class="program reveal" style={`--d:${i * 90}ms`}>
+          <div class="program-top"><span class="mono">Programme / 0{i + 1}</span><Icon name="book" size={26} /></div>
+          <h2 class="program-code">{p.name}</h2>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+          <ul class="tick-list">{p.topics.map((t) => <li><Icon name="check" size={18} />{t}</li>)}</ul>
+          <div class="program-aud"><p class="mono">Who should attend</p><p>{p.audience}</p></div>
+          <Button href={`/contact/?service=${encodeURIComponent(`Training: ${p.name}`)}`} variant="outline">Enquire About {p.name}</Button>
+        </article>
+      ))}
+    </div>
+    <p class="note program-note">These programmes provide certification exam preparation. Certification, examination registration and award requirements are determined by the relevant certification body. Training does not guarantee examination success.</p>
+  </div>
+</section>
+<section class="section paper-2">
+  <div class="wrap about-intro">
+    <div>
+      <p class="label reveal">Your learning needs</p>
+      <h2 class="reveal" style="--d:80ms">Start with your <em>professional goals.</em></h2>
+    </div>
+    <div class="about-copy">
+      <p class="lead reveal">Share your experience, target certification, location and preferred training format.</p>
+      <p class="reveal">Course format, availability, timing and fees are confirmed directly with the team.</p>
+      <div class="reveal"><Button href="/contact/?service=Training">Discuss Training Requirements</Button></div>
+    </div>
+  </div>
+</section>

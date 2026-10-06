@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+client-materials/
+output/
+.env
+.env.*
+!.env.example

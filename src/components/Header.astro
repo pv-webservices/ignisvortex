@@ -1,0 +1,96 @@
+---
+import { nav, services, serviceGroups, products, site } from '../data/site';
+import Icon from './Icon.astro';
+const current = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+const withMenu = ['About', 'Services', 'Products'];
+---
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="topbar dark">
+  <div class="wrap topbar-inner">
+    <p class="mono">Fire Protection · Life Safety · Civil Engineering · Fire Safety Products &amp; Installation</p>
+    <div class="topbar-links">
+      <a href={`mailto:${site.email}`}><Icon name="mail" size={15} />{site.email}</a>
+      <a href={site.facebook} target="_blank" rel="noopener noreferrer" aria-label="Ignis Vortex on Facebook (opens in a new tab)"><Icon name="facebook" size={15} />Facebook</a>
+    </div>
+  </div>
+</div>
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Ignis Vortex home"><img src="/assets/logo.webp" width="640" height="138" alt="Ignis Vortex" fetchpriority="high" /></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        {nav.map(([label, href]) => (
+          <li class:list={['nav-item', { 'has-menu': withMenu.includes(label) }]}>
+            <a href={href} aria-current={current === href ? 'page' : undefined} class:list={{ active: isActive(href) }}>
+              {label}{withMenu.includes(label) && <Icon name="chevron" size={14} class="chev" />}
+            </a>
+            {label === 'Services' && (
+              <div class="mega">
+                <div class="mega-cols">
+                  {serviceGroups.map((group) => (
+                    <div>
+                      <p class="label plain">{group.name}</p>
+                      {services.filter((s) => s.group === group.name).map((s) => (
+                        <a href={`/services/${s.slug}/`} class="mega-link"><Icon name={s.icon} size={18} /><span>{s.title}</span></a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <a class="mega-feature dark" href="/engineering-software/">
+                  <img src="/media/poster-cfd-loop.webp" alt="" width="960" height="540" loading="lazy" />
+                  <span class="label plain">Engineering intelligence</span>
+                  <strong>Software-driven fire engineering</strong>
+                  <span class="mega-more">CFD · Egress · Hydraulics <Icon name="arrow" size={16} /></span>
+                </a>
+              </div>
+            )}
+            {label === 'Products' && (
+              <div class="mega mega-sm">
+                <p class="label plain">Supply &amp; installation</p>
+                {products.map((p) => <a href={`/products/${p.slug}/`} class="mega-link"><Icon name={p.icon} size={18} /><span>{p.title}</span></a>)}
+              </div>
+            )}
+            {label === 'About' && (
+              <div class="mega mega-sm">
+                <a href="/about/" class="mega-link"><Icon name="building" size={18} /><span>About Ignis Vortex</span></a>
+                <a href="/leadership/" class="mega-link"><Icon name="people" size={18} /><span>Our leadership</span></a>
+                <a href="/engineering-software/" class="mega-link"><Icon name="settings" size={18} /><span>Engineering intelligence</span></a>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a class="btn btn-sm header-cta" href="/request-review/"><span>Request a Review</span><Icon name="arrow" size={16} /></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<noscript><nav class="nojs-nav wrap" aria-label="Navigation without JavaScript">{nav.map(([label, href]) => <a href={href}>{label}</a>)}<a href="/request-review/">Request a Review</a></nav></noscript>
+<dialog class="mobile-menu dark" id="mobile-menu" aria-label="Mobile navigation">
+  <div class="mm-top">
+    <img src="/assets/logo-reversed.webp" width="640" height="138" alt="Ignis Vortex" loading="lazy" />
+    <button class="menu-close" type="button" aria-label="Close navigation"><Icon name="close" size={26} /></button>
+  </div>
+  <nav aria-label="Mobile navigation" class="mm-nav">
+    {nav.map(([label, href], i) => {
+      const sub = label === 'Services'
+        ? [['All practice areas', '/services/'], ...services.map((s) => [s.title, `/services/${s.slug}/`])]
+        : label === 'Products'
+          ? [['All products & installation', '/products/'], ...products.map((p) => [p.title, `/products/${p.slug}/`])]
+          : null;
+      return sub ? (
+        <details class="mm-group">
+          <summary><span class="mm-num mono">0{i + 1}</span>{label}<Icon name="plus" size={20} /></summary>
+          <div class="mm-sub">{sub.map(([t, h]) => <a href={h}>{t}</a>)}</div>
+        </details>
+      ) : (
+        <a href={href} aria-current={current === href ? 'page' : undefined}><span class="mm-num mono">0{i + 1}</span>{label}<Icon name="arrow" size={20} /></a>
+      );
+    })}
+  </nav>
+  <div class="mm-foot">
+    <a href="/request-review/" class="btn"><span>Request a Technical Review</span><Icon name="arrow" size={18} /></a>
+    <a class="mm-mail" href={`mailto:${site.email}`}><Icon name="mail" size={18} />{site.email}</a>
+  </div>
+</dialog>

@@ -1,0 +1,28 @@
+---
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import SoftwareTable from '../SoftwareTable.astro';
+---
+<section class="section intelligence dark blueprint">
+  <div class="wrap">
+    <div class="intel-top">
+      <div class="intel-copy">
+        <p class="label reveal">Engineering intelligence</p>
+        <h2 class="reveal" style="--d:80ms">Software-driven engineering for <em>smarter, safer buildings.</em></h2>
+        <p class="lead reveal" style="--d:160ms">Advanced CFD fire modelling, 3D occupant egress simulation and automated hydraulic calculations — used to understand performance and resolve clashes before construction.</p>
+        <div class="btn-row reveal" style="--d:220ms">
+          <Button href="/engineering-software/">Our Technical Capabilities</Button>
+          <Button href="/resources/#demonstrations" variant="ghost" icon="play">Watch Demonstrations</Button>
+        </div>
+      </div>
+      <figure class="ambient corners reveal scale">
+        <video class="ambient-video" data-ambient muted loop playsinline preload="none" poster="/media/poster-cfd-loop.webp" aria-label="Looping excerpt of a PyroSim CFD fire simulation">
+          <source data-src="/media/cfd-loop.mp4" type="video/mp4" />
+        </video>
+        <button class="ambient-toggle" type="button" data-ambient-toggle aria-label="Pause background video" hidden><Icon name="pause" size={18} /></button>
+        <figcaption class="mono"><span class="rec" aria-hidden="true"></span>FDS / PyroSim · CFD fire &amp; smoke analysis</figcaption>
+      </figure>
+    </div>
+    <SoftwareTable />
+  </div>
+</section>

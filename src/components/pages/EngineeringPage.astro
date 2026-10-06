@@ -1,0 +1,35 @@
+---
+import SectionHead from '../SectionHead.astro';
+import SoftwareTable from '../SoftwareTable.astro';
+import VideoPlayer from '../VideoPlayer.astro';
+import Icon from '../Icon.astro';
+const workflow = [
+  ['Input', 'Plans, models and design criteria'],
+  ['Analysis', 'Hydraulics, fire, smoke, egress and pressure'],
+  ['Validation', 'Code, constructability and performance'],
+  ['Output', 'Calculations, reports, drawings and reviews'],
+];
+---
+<section class="section">
+  <div class="wrap">
+    <SectionHead label="The engineering workflow" title="From project inputs <em>to defensible decisions.</em>" />
+    <ol class="workflow">
+      {workflow.map(([t, d], i) => <li class="reveal" style={`--d:${i * 90}ms`}><span class="mono">0{i + 1}</span><h3 class="display">{t}</h3><p>{d}</p>{i < workflow.length - 1 && <Icon name="arrow" size={26} class="workflow-arrow" />}</li>)}
+    </ol>
+  </div>
+</section>
+<section class="section dark blueprint">
+  <div class="wrap">
+    <SectionHead label="Software-driven fire protection design & modelling" title="Precision in analysis. <em>Confidence in design.</em>" text="Each software package is applied to a defined technical question and produces a documented engineering output." split />
+    <SoftwareTable />
+  </div>
+</section>
+<section class="section" id="demonstrations">
+  <div class="wrap">
+    <SectionHead label="See the analysis" title="Modelling <em>in motion.</em>" text="Client-supplied demonstrations of CFD fire modelling and occupant evacuation modelling." />
+    <div class="video-grid">
+      <VideoPlayer id="fire-model" src="/media/fire-modelling-pyrosim.mp4" poster="/media/poster-fire.webp" title="Fire Modelling with PyroSim" label="FDS / PyroSim · CFD" text="Fire growth, smoke movement and temperature fields used for tenability analysis and performance-based design." duration="1:18" />
+      <VideoPlayer id="evacuation-model" src="/media/evacuation-modelling.mp4" poster="/media/poster-evacuation.webp" title="Evacuation Modelling" label="Pathfinder · Egress" text="3D occupant movement used for egress time, exit capacity and bottleneck assessment." duration="0:30" portrait />
+    </div>
+  </div>
+</section>

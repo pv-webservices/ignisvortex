@@ -1,0 +1,29 @@
+---
+import SectionHead from '../SectionHead.astro';
+import VideoPlayer from '../VideoPlayer.astro';
+import Card from '../Card.astro';
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+const links = [
+  { href: '/engineering-software/', image: 'cfd-tenability', title: 'Engineering capabilities', text: 'Hydraulics, CFD, evacuation, airflow and coordinated design documentation.', icon: 'settings' },
+  { href: '/training/', image: 'gen/training-session', title: 'Training programmes', text: 'CFPS, CWBSP and CFPE certification exam preparation.', icon: 'book' },
+  { href: '/products/', image: 'gen/installation-team', title: 'Products & installation', text: 'Fire safety and security systems, supplied, installed and commissioned.', icon: 'install' },
+];
+---
+<section class="section" id="demonstrations">
+  <div class="wrap">
+    <SectionHead label="Client-supplied demonstrations" title="A closer look at <em>engineering analysis.</em>" text="Technical demonstrations of fire dynamics and occupant evacuation modelling. Video loads only when you press play." split />
+    <div class="video-grid">
+      <VideoPlayer id="fire-model" src="/media/fire-modelling-pyrosim.mp4" poster="/media/poster-fire.webp" title="Fire Modelling with PyroSim" label="Fire dynamics" text="A demonstration of fire and smoke simulation — fire growth, smoke layer and temperature fields." duration="1:18" />
+      <VideoPlayer id="evacuation-model" src="/media/evacuation-modelling.mp4" poster="/media/poster-evacuation.webp" title="Evacuation Modelling" label="Life safety" text="A demonstration of occupant movement and evacuation through stairs and escalators." duration="0:30" portrait />
+    </div>
+    <p class="note" style="margin-top:28px">These demonstrations are explanatory and do not establish performance for another building or design.</p>
+  </div>
+</section>
+<section class="section paper-2">
+  <div class="wrap">
+    <SectionHead label="Explore further" title="Capabilities &amp; <em>learning.</em>" />
+    <div class="card-grid">{links.map((l, i) => <Card href={l.href} image={l.image} title={l.title} text={l.text} icon={l.icon} cta="Read more" delay={i * 80} />)}</div>
+    <div class="info-note reveal"><Icon name="mail" size={24} /><p>For company profile information or project-specific technical documentation, <a href={`mailto:${site.email}`}>contact our team</a>.</p></div>
+  </div>
+</section>

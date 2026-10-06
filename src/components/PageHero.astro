@@ -1,0 +1,30 @@
+---
+import Button from './Button.astro';
+import Img from './Img.astro';
+interface Props { title: string; eyebrow: string; description: string; image?: string; parent?: { label: string; href: string }; imageAlt?: string; position?: string; }
+const { title, eyebrow, description, image = 'plans', parent, imageAlt = '', position } = Astro.props;
+const onFormPage = ['/contact/', '/request-review/'].includes(Astro.url.pathname);
+const ctaHref = onFormPage ? '#enquiry-form' : '/request-review/';
+const words = title.replace(/\.$/, '').split(' ');
+const accentFrom = Math.max(1, Math.ceil(words.length * 0.55));
+const headline = `${words.slice(0, accentFrom).join(' ')} <em>${words.slice(accentFrom).join(' ')}</em>`;
+---
+<section class="page-hero blueprint">
+  <div class="wrap page-hero-grid">
+    <div class="page-hero-copy">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        {parent && <><a href={parent.href}>{parent.label}</a><span aria-hidden="true">/</span></>}
+        <span aria-current="page">{eyebrow}</span>
+      </nav>
+      <h1 set:html={headline} />
+      <p class="lead">{description}</p>
+      <div class="btn-row">
+        <Button href={ctaHref}>{onFormPage ? 'Go to the Enquiry Form' : 'Discuss Your Project'}</Button>
+        <slot name="actions" />
+      </div>
+    </div>
+    <div class="page-hero-media"><Img src={image} alt={imageAlt} sizes="(max-width: 900px) 100vw, 50vw" eager position={position} /></div>
+  </div>
+  <span class="hero-index mono" aria-hidden="true">CODE / COMPLIANCE / SAFETY</span>
+</section>

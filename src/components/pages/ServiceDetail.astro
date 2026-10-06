@@ -1,0 +1,73 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Card from '../Card.astro';
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import { services, type Service } from '../../data/site';
+interface Props { service: Service; }
+const { service } = Astro.props;
+const related = services.filter((s) => s.slug !== service.slug && s.group === service.group).concat(services.filter((s) => s.group !== service.group)).slice(0, 3);
+const approach = [
+  ['Understand', 'Review the brief, location, project stage and available design information.'],
+  ['Analyse', 'Assess code requirements, engineering assumptions and system coordination.'],
+  ['Resolve', 'Document findings and work with the project team on the required actions.'],
+  ['Deliver', 'Provide the agreed engineering reports, reviews and documentation.'],
+];
+const faqs = [
+  ['What information should I share?', 'Include the project location, occupancy or use, current stage, scope required and a summary of available drawings and calculations. After initial contact, we can agree how to exchange technical documents.'],
+  ['Which code requirements apply?', 'The relevant jurisdiction, authority, project criteria and code edition determine the review basis. These are confirmed as part of the agreed scope.'],
+  ['How are scope and timing confirmed?', 'The team reviews the brief and available information before confirming scope, required inputs, deliverables and timing. Share any submission deadlines in your enquiry.'],
+  ...(service.slug === 'pe-stamp' ? [['Is sealing available for every project?', 'Sealing depends on the licensed discipline, state requirements and the engineer’s review of the project. Eligibility and scope are assessed before engagement.']] : []),
+];
+---
+<section class="section">
+  <div class="wrap detail-grid">
+    <div class="detail-main">
+      <SectionHead label="Scope of services" title="A focused response <em>to your project.</em>" />
+      <ol class="scope-list">
+        {service.scope.map((s, i) => <li class="reveal" style={`--d:${i * 70}ms`}><span class="mono">{String(i + 1).padStart(2, '0')}</span><p>{s}</p><Icon name="check" size={22} /></li>)}
+      </ol>
+      <div class="deliverables dark blueprint reveal">
+        <p class="label">Engineering deliverables</p>
+        <ul>{service.outputs.map((o) => <li><Icon name="document" size={22} /><span>{o}</span></li>)}</ul>
+      </div>
+      <div class="prose-block reveal">
+        <h3>What you can expect</h3>
+        <p>We begin by understanding the project location, building use, stage of development and available technical information. The review scope, applicable codes and required deliverables are then agreed for the project.</p>
+      </div>
+    </div>
+    <aside class="detail-aside">
+      <div class="aside-card">
+        <p class="label plain">At a glance</p>
+        <dl>
+          <div><dt>Who we work with</dt><dd>{service.audience}</dd></div>
+          <div><dt>Codes &amp; standards</dt><dd>{service.codes}<small>The applicable code, edition and scope are confirmed for each project.</small></dd></div>
+          <div><dt>Engineering tools</dt><dd>{service.tools}</dd></div>
+        </dl>
+        <Button href={`/request-review/?service=${encodeURIComponent(service.title)}`}>Request This Service</Button>
+      </div>
+    </aside>
+  </div>
+</section>
+<section class="section paper-2">
+  <div class="wrap">
+    <SectionHead label="Our approach" title="A clear path from <em>information to insight.</em>" />
+    <ol class="approach">
+      {approach.map(([t, d], i) => <li class="reveal" style={`--d:${i * 90}ms`}><span class="approach-n display">0{i + 1}</span><h3>{t}</h3><p>{d}</p></li>)}
+    </ol>
+  </div>
+</section>
+<section class="section white">
+  <div class="wrap faq-grid">
+    <SectionHead label="Useful to know" title="Before <em>we begin.</em>" />
+    <div class="faq-list">
+      {faqs.map(([q, a]) => <details class="faq"><summary>{q}<Icon name="plus" size={20} /></summary><p>{a}</p></details>)}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <SectionHead label="Connected expertise" title="Related <em>practice areas.</em>" />
+    <div class="card-grid">{related.map((s, i) => <Card href={`/services/${s.slug}/`} image={s.image} title={s.title} text={s.short} icon={s.icon} cta="Explore service" delay={i * 80} />)}</div>
+  </div>
+</section>

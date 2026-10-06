@@ -1,0 +1,30 @@
+---
+import Img from '../Img.astro';
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import { programs } from '../../data/site';
+---
+<section class="section academy white">
+  <div class="wrap academy-grid">
+    <div class="academy-media media corners reveal clip">
+      <Img src="gen/training-session" alt="Engineers attending a technical fire protection training session" sizes="(max-width: 900px) 100vw, 45vw" />
+    </div>
+    <div class="academy-copy">
+      <p class="label reveal">Executive Training &amp; Certification Academy</p>
+      <h2 class="reveal" style="--d:80ms">Certification prep, <em>led by a practising PE.</em></h2>
+      <p class="lead reveal" style="--d:140ms">Technical training programmes for engineers, consultants and authority personnel — led by a dual-licensed PE holding CFPS, CFPE, CWBSP and CHRS credentials.</p>
+      <ul class="program-rows">
+        {programs.map((p, i) => (
+          <li class="reveal" style={`--d:${180 + i * 70}ms`}>
+            <a href={`/contact/?service=${encodeURIComponent(`Training: ${p.name}`)}`}>
+              <strong class="display">{p.name}</strong>
+              <span><b>{p.title}</b>{p.text}</span>
+              <Icon name="arrow-up-right" size={22} />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="reveal"><Button href="/training/">Explore the Academy</Button></div>
+    </div>
+  </div>
+</section>

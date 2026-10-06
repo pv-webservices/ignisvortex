@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+interface Props { href: string; image: string; title: string; text: string; icon?: string; kicker?: string; cta?: string; list?: string[]; delay?: number; }
+const { href, image, title, text, icon, kicker, cta = 'Explore', list, delay = 0 } = Astro.props;
+---
+<a href={href} class="card reveal" style={`--d:${delay}ms`}>
+  <span class="card-media zoom"><Img src={image} alt="" sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 33vw" /></span>
+  <span class="card-body">
+    {kicker && <span class="card-kicker mono">{kicker}</span>}
+    <span class="card-title">{icon && <Icon name={icon} size={22} />}<strong>{title}</strong></span>
+    <span class="card-text">{text}</span>
+    {list && <ul class="card-list">{list.map((l) => <li>{l}</li>)}</ul>}
+    <span class="card-cta">{cta}<Icon name="arrow" size={18} /></span>
+  </span>
+</a>

@@ -1,0 +1,47 @@
+---
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import Img from '../Img.astro';
+import { kpis } from '../../data/site';
+const competencies = [
+  ['shield', 'Fire Safety', 'Engineering'],
+  ['people', 'Life Safety', '& Security'],
+  ['document', 'Code Compliance', '& Plan Review'],
+  ['install', 'Products &', 'Installation'],
+];
+---
+<section class="hero dark" aria-labelledby="hero-title">
+  <div class="hero-media">
+    <Img src="gen/hero-pump-room" alt="Fire protection engineer reviewing a tablet beside red fire pump pipework in a plant room" eager sizes="100vw" width={1536} height={1024} />
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="hero-kicker mono"><span>Safer people</span><span>Safer buildings</span><span>Stronger communities</span></p>
+      <h1 id="hero-title" class="hero-title">
+        <span class="line"><span>Code-Led Fire Protection,</span></span>
+        <span class="line"><span><em>Life Safety &amp; Civil</em></span></span>
+        <span class="line"><span>Engineering Consultancy</span></span>
+      </h1>
+      <p class="hero-sub">Bridging complex technical design, international code compliance, and executive project delivery across Saudi Arabia, the GCC, India, and North America.</p>
+      <div class="btn-row hero-actions">
+        <Button href="/request-review/">Request Technical Review / Audit</Button>
+        <Button href="/services/" variant="ghost">Explore Practice Areas</Button>
+      </div>
+      <ul class="hero-competencies" aria-label="Core competencies">
+        {competencies.map(([icon, a, b]) => <li><Icon name={icon} size={26} /><span>{a}<br />{b}</span></li>)}
+      </ul>
+    </div>
+    <p class="hero-side mono" aria-hidden="true">Plan<br />Review<br />Compliance<br />Engineering<br />Safety<br />Solutions</p>
+  </div>
+  <div class="hero-kpis">
+    <ul class="wrap kpi-grid" aria-label="At a glance">
+      {kpis.map((k) => (
+        <li class="kpi">
+          <strong class="kpi-value"><span data-count={k.value}>{k.value}</span>{k.suffix && <sup>{k.suffix}</sup>}</strong>
+          <span class="kpi-text"><b>{k.title}</b>{k.text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

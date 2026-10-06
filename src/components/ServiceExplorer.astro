@@ -1,0 +1,42 @@
+---
+// Interactive practice-area index: hovering/focusing a row swaps the sticky preview (desktop);
+// on touch/mobile each row carries its own thumbnail, so nothing depends on hover.
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import { services, serviceGroups } from '../data/site';
+let index = 0;
+const groups = serviceGroups.map((g) => ({ ...g, items: services.filter((s) => s.group === g.name).map((s) => ({ ...s, n: ++index })) }));
+---
+<div class="explorer" data-explorer>
+  <div class="explorer-list">
+    {groups.map((g) => (
+      <div class="explorer-group">
+        <p class="explorer-group-name mono">{g.name}</p>
+        <ul>
+          {g.items.map((s) => (
+            <li>
+              <a href={`/services/${s.slug}/`} class:list={['explorer-row', { active: s.n === 1 }]} data-preview={s.n}>
+                <span class="explorer-n mono">{String(s.n).padStart(2, '0')}</span>
+                <span class="explorer-thumb media"><Img src={s.image} alt="" sizes="120px" width={720} height={480} /></span>
+                <span class="explorer-text"><strong>{s.title}</strong><span>{s.short}</span></span>
+                <Icon name="arrow-up-right" size={22} class="explorer-arrow" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div class="explorer-preview corners" aria-hidden="true">
+    {groups.flatMap((g) => g.items).map((s) => (
+      <figure class:list={['explorer-slide', { active: s.n === 1 }]} data-slide={s.n}>
+        <Img src={s.image} alt="" sizes="40vw" />
+        <figcaption>
+          <span class="mono">{s.group}</span>
+          <strong class="display">{s.title}</strong>
+          <span class="explorer-tools mono">{s.tools}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</div>

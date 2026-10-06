@@ -1,0 +1,23 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/site';
+interface Props { title?: string; text?: string; }
+const {
+  title = 'Let’s engineer a <em>safer outcome.</em>',
+  text = 'Share your project location, stage and scope. We’ll help define the right technical review, audit, product or installation package.',
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="cta-media" aria-hidden="true"><img src="/assets/gen/hero-pump-room-small.webp" alt="" width="720" height="480" loading="lazy" /></div>
+  <div class="wrap cta-inner">
+    <div>
+      <p class="label plain">Ready to discuss your project?</p>
+      <h2 class="reveal" set:html={title} />
+      <p class="cta-text">{text}</p>
+    </div>
+    <div class="cta-actions">
+      <Button href="/request-review/" variant="light">Request a Technical Review</Button>
+      <a class="cta-mail" href={`mailto:${site.email}`}>or email {site.email}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LegalPage from '../components/pages/LegalPage.astro';
+import ResourcesPage from '../components/pages/ResourcesPage.astro';
+import TrainingPage from '../components/pages/TrainingPage.astro';
+import EngineeringPage from '../components/pages/EngineeringPage.astro';
+import CompanyPages from '../components/pages/CompanyPages.astro';
+import SectorPages from '../components/pages/SectorPages.astro';
+import ProductPages from '../components/pages/ProductPages.astro';
+import ServiceDetail from '../components/pages/ServiceDetail.astro';
+import PracticeIndex from '../components/pages/PracticeIndex.astro';
+import PageHero from '../components/PageHero.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import CTA from '../components/CTA.astro';
+import { staticPages, services, products, sectors, site } from '../data/site';
+
+export function getStaticPaths() {
+  return [
+    ...staticPages.map((path) => ({ params: { path } })),
+    ...services.map((item) => ({ params: { path: `services/${item.slug}` } })),
+    ...products.map((item) => ({ params: { path: `products/${item.slug}` } })),
+    ...sectors.map((item) => ({ params: { path: `sectors/${item.slug}` } })),
+  ];
+}
+
+type PageMeta = { title: string; eyebrow: string; description: string; image: string; imageAlt?: string; position?: string };
+const path = Astro.params.path || '';
+const service = path.startsWith('services/') ? services.find((s) => `services/${s.slug}` === path) : undefined;
+const product = path.startsWith('products/') ? products.find((s) => `products/${s.slug}` === path) : undefined;
+const sector = path.startsWith('sectors/') ? sectors.find((s) => `sectors/${s.slug}` === path) : undefined;
+
+const pages: Record<string, PageMeta> = {
+  about: { title: 'Engineering with purpose.', eyebrow: 'About Ignis Vortex', description: 'An independent consultancy for fire protection engineering, life safety strategy, civil utilities and third-party audits — with fire safety products and installation support.', image: 'gen/svc-code-review' },
+  services: { title: 'From first principles to final handover.', eyebrow: 'Practice areas', description: 'Integrated fire protection, life safety, technical advisory and civil engineering. Clear thinking at every stage of your project.', image: 'gen/svc-sprinkler-design' },
+  products: { title: 'Products, supplied and installed right.', eyebrow: 'Products & installation', description: 'Fire alarm, extinguishers, sprinkler & hydrant, detection, emergency lighting and security systems — selected for your building, installed and commissioned.', image: 'gen/installation-team', imageAlt: 'Technicians installing sprinkler pipework and smoke detectors' },
+  sectors: { title: 'Expertise shaped by complex environments.', eyebrow: 'Sector experience', description: 'Professional experience across industrial compounds, luxury hospitality, high-rise developments and specialised infrastructure.', image: 'highrise' },
+  training: { title: 'Build your technical confidence.', eyebrow: 'Training & Certification Academy', description: 'Engineering-led preparation for CFPS, CWBSP and CFPE examinations. Focused learning for engineers, consultants and authority personnel.', image: 'gen/training-session' },
+  resources: { title: 'Engineering insight in practice.', eyebrow: 'Technical resources', description: 'Fire and evacuation modelling demonstrations, technical capabilities and certification preparation information.', image: 'cfd-tenability', imageAlt: 'Frame from a CFD fire simulation showing temperature distribution' },
+  leadership: { title: 'Technical depth. Global perspective.', eyebrow: 'Our leadership', description: 'M. Waseem Mehdi, P.E., FICE — Principal Engineer & Managing Director of Ignis Code & Plan Review Services LLC.', image: 'highrise' },
+  contact: { title: 'Let’s discuss your next project.', eyebrow: 'Contact', description: 'Connect with our team for engineering consultancy, technical review, products and installation, or professional training.', image: 'gen/hero-pump-room', position: '70% center' },
+  'request-review': { title: 'Start with a technical conversation.', eyebrow: 'Request a review', description: 'Share your project brief for a technical review, life safety audit or engineering consultation. A clear scope starts with the right information.', image: 'gen/svc-code-review' },
+  'engineering-software': { title: 'Understand performance. Inform design.', eyebrow: 'Engineering intelligence', description: 'From hydraulic calculations to fire dynamics, evacuation and pressure modelling — analysis connected to the engineering decision.', image: 'cfd-tenability', imageAlt: 'Frame from a CFD fire simulation showing temperature distribution' },
+  privacy: { title: 'Your enquiry. Your information.', eyebrow: 'Privacy', description: 'How this website handles enquiry details and external links.', image: 'plans' },
+  terms: { title: 'Website terms of use.', eyebrow: 'Terms of use', description: 'Information about the use of this website and its technical content.', image: 'structure' },
+};
+
+const page: PageMeta = service
+  ? { title: service.title, eyebrow: service.group, description: service.intro, image: service.image }
+  : product
+    ? { title: product.title, eyebrow: 'Product category', description: product.intro, image: product.image, imageAlt: product.alt }
+    : sector
+      ? { title: sector.title, eyebrow: 'Sector experience', description: sector.intro, image: sector.image }
+      : pages[path];
+const parent = service ? { label: 'Services', href: '/services/' } : product ? { label: 'Products', href: '/products/' } : sector ? { label: 'Sectors', href: '/sectors/' } : undefined;
+const schema = service
+  ? { '@type': 'Service', name: service.title, description: service.intro, provider: { '@type': 'Organization', name: site.name }, url: `${site.domain}/services/${service.slug}/` }
+  : product
+    ? { '@type': 'Service', name: `${product.title} — supply & installation`, description: product.intro, provider: { '@type': 'Organization', name: site.name }, url: `${site.domain}/products/${product.slug}/` }
+    : undefined;
+const withCTA = !['contact', 'request-review', 'privacy', 'terms'].includes(path);
+---
+<Layout title={page.title.replace(/\.$/, '')} description={page.description} schema={schema} preload={page.image} ogImage={`/assets/${page.image}.webp`}>
+  <PageHero {...page} parent={parent} />
+  {path === 'services' && <PracticeIndex />}
+  {service && <ServiceDetail service={service} />}
+  {(path === 'products' || product) && <ProductPages path={path} product={product} />}
+  {(path === 'sectors' || sector) && <SectorPages path={path} sector={sector} />}
+  {(path === 'about' || path === 'leadership') && <CompanyPages path={path} />}
+  {path === 'engineering-software' && <EngineeringPage />}
+  {path === 'training' && <TrainingPage />}
+  {path === 'resources' && <ResourcesPage />}
+  {(path === 'contact' || path === 'request-review') && <EnquiryForm review={path === 'request-review'} />}
+  {(path === 'privacy' || path === 'terms') && <LegalPage path={path} />}
+  {withCTA && <CTA />}
+</Layout>

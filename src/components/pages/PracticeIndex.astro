@@ -1,0 +1,36 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Card from '../Card.astro';
+import Button from '../Button.astro';
+import SoftwareTable from '../SoftwareTable.astro';
+import { services, serviceGroups } from '../../data/site';
+---
+<section class="section">
+  <div class="wrap">
+    {serviceGroups.map((group, gi) => (
+      <div class="practice-group">
+        <div class="practice-head">
+          <span class="practice-n display" aria-hidden="true">0{gi + 1}</span>
+          <div>
+            <p class="label reveal">Practice {String(gi + 1).padStart(2, '0')}</p>
+            <h2 class="reveal" style="--d:80ms">{group.name}</h2>
+            <p class="lead reveal" style="--d:140ms">{group.text}</p>
+          </div>
+        </div>
+        <div class="card-grid">
+          {services.filter((s) => s.group === group.name).map((s, i) => (
+            <Card href={`/services/${s.slug}/`} image={s.image} title={s.title} text={s.short} icon={s.icon} kicker={s.tools.split(' · ').slice(0, 3).join(' · ')} cta="Explore service" list={s.scope.slice(0, 2)} delay={i * 80} />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+<section class="section paper-2">
+  <div class="wrap">
+    <SectionHead label="Software-driven fire protection design & modelling" title="The tools behind <em>the engineering.</em>" text="Each package is applied to a defined technical question and produces a documented output." split>
+      <Button href="/engineering-software/" variant="outline">Engineering Intelligence</Button>
+    </SectionHead>
+    <SoftwareTable light />
+  </div>
+</section>

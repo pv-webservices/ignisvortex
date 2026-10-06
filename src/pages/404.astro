@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+<Layout title="Page not found" description="This page could not be found. Explore Ignis Vortex engineering services or contact the team." noindex={true}>
+  <section class="not-found dark blueprint">
+    <div class="wrap">
+      <p class="label">404 / Page not found</p>
+      <h1>Let’s get you <em>back on plan.</em></h1>
+      <p class="lead">The page you’re looking for may have moved. Our practice areas are a good place to start.</p>
+      <div class="btn-row"><Button href="/">Return Home</Button><Button href="/services/" variant="ghost">Explore Services</Button></div>
+    </div>
+  </section>
+</Layout>

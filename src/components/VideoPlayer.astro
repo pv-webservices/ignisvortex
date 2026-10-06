@@ -1,0 +1,23 @@
+---
+// Click-to-play client video. No bytes are requested until the visitor chooses playback.
+import Icon from './Icon.astro';
+interface Props { id: string; src: string; poster: string; title: string; label: string; text: string; portrait?: boolean; duration?: string; }
+const { id, src, poster, title, label, text, portrait = false, duration } = Astro.props;
+---
+<article class:list={['video-card', { portrait }]}>
+  <div class="video-frame corners">
+    <video id={id} data-lazy-video preload="none" playsinline poster={poster} aria-label={title}>
+      <source data-src={src} type="video/mp4" />
+    </video>
+    <button class="video-play" type="button" data-video-target={id} aria-label={`Play ${title}`}>
+      <span class="video-play-icon"><Icon name="play" size={26} /></span>
+      <span class="mono">Watch demonstration{duration && ` · ${duration}`}</span>
+    </button>
+  </div>
+  <div class="video-meta">
+    <p class="label">{label}</p>
+    <h3>{title}</h3>
+    <p>{text}</p>
+    <a class="link-arrow" href={src} download>Download video<Icon name="download" size={18} /></a>
+  </div>
+</article>

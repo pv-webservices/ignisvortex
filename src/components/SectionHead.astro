@@ -1,0 +1,18 @@
+---
+// Section heading. `title` may contain <em> for the accent phrase (trusted, authored content only).
+interface Props { label: string; title: string; text?: string; split?: boolean; center?: boolean; tag?: 'h1' | 'h2'; }
+const { label, title, text, split = false, center = false, tag: Tag = 'h2' } = Astro.props;
+const hasActions = Astro.slots.has('default');
+---
+<div class:list={['section-head', { split, center }]}>
+  <div class="head-main">
+    <p class="label reveal">{label}</p>
+    <Tag class="reveal" style="--d:80ms; margin-top:18px" set:html={title} />
+  </div>
+  {(text || hasActions) && (
+    <div class="head-side reveal" style="--d:160ms">
+      {text && <p class="lead">{text}</p>}
+      {hasActions && <div class="head-actions" style={text ? 'margin-top:24px' : undefined}><slot /></div>}
+    </div>
+  )}
+</div>

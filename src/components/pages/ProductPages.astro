@@ -1,0 +1,75 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import Img from '../Img.astro';
+import Delivery from '../Delivery.astro';
+import ProductRail from '../ProductRail.astro';
+import { products } from '../../data/site';
+interface Props { path: string; product?: (typeof products)[number]; }
+const { path, product } = Astro.props;
+const enquiry = (title: string) => `/contact/?service=${encodeURIComponent(`Product: ${title}`)}`;
+---
+{path === 'products' && (
+  <>
+    <section class="section">
+      <div class="wrap">
+        <SectionHead label="Explore the range" title="Fire safety &amp; <em>security solutions.</em>" text="Each category is selected against the building, its hazards and the approved design — then supplied, installed and commissioned." split>
+          <Button href="/contact/?service=Product%20Enquiry" variant="outline">Send an Equipment Schedule</Button>
+        </SectionHead>
+        <div class="product-grid">
+          {products.map((p, i) => (
+            <article class="product-tile reveal" style={`--d:${(i % 3) * 80}ms`}>
+              <a href={`/products/${p.slug}/`} class="product-tile-media zoom" tabindex="-1" aria-hidden="true"><Img src={p.image} alt="" sizes="(max-width: 700px) 100vw, 33vw" width={1024} height={1024} /></a>
+              <div class="product-tile-body">
+                <span class="product-n mono">{String(i + 1).padStart(2, '0')}</span>
+                <h3><a href={`/products/${p.slug}/`}>{p.title}</a></h3>
+                <p>{p.short}</p>
+                <ul class="chip-row">{p.applications.slice(0, 2).map((a) => <li class="chip">{a}</li>)}</ul>
+                <div class="product-tile-actions">
+                  <a class="link-arrow" href={`/products/${p.slug}/`}>View category<Icon name="arrow" size={18} /></a>
+                  <a class="link-arrow" href={enquiry(p.title)}>Enquire<Icon name="mail" size={18} /></a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="info-note reveal"><Icon name="document" size={24} /><p>Product brands, configurations, specifications and availability are confirmed on enquiry. Share your design requirements or equipment schedule with our team. Product images are representative of each category.</p></div>
+      </div>
+    </section>
+    <Delivery />
+  </>
+)}
+{product && (
+  <>
+    <section class="section">
+      <div class="wrap detail-grid">
+        <div class="detail-main">
+          <SectionHead label="Applications" title="Selection starts <em>with your building.</em>" />
+          <ol class="scope-list">
+            {product.applications.map((s, i) => <li class="reveal" style={`--d:${i * 70}ms`}><span class="mono">{String(i + 1).padStart(2, '0')}</span><p>{s}</p><Icon name="check" size={22} /></li>)}
+          </ol>
+          <div class="prose-block reveal">
+            <h3>Project considerations</h3>
+            <ul class="tick-list">{product.considerations.map((c) => <li><Icon name="check" size={20} />{c}</li>)}</ul>
+          </div>
+          <div class="info-note reveal"><Icon name="document" size={24} /><p>Detailed technical information, available configurations, manufacturer documentation and product selection are confirmed for the specific enquiry. The image shown is representative of the category.</p></div>
+        </div>
+        <aside class="detail-aside">
+          <div class="aside-card">
+            <div class="aside-product media"><Img src={product.image} alt={product.alt} sizes="360px" width={1024} height={1024} /></div>
+            <p class="label plain">Supply &amp; installation</p>
+            <p>Share the building use, project location, quantity or equipment schedule, and any applicable technical criteria.</p>
+            <Button href={enquiry(product.title)}>Request Product Information</Button>
+            <a class="link-arrow" href="/products/">All product categories<Icon name="arrow" size={18} /></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <Delivery />
+    <section class="section">
+      <div class="wrap"><SectionHead label="Complete the system" title="Other <em>product categories.</em>" /></div>
+      <div class="wrap-rail"><ProductRail exclude={product.slug} /></div>
+    </section>
+  </>
+)}

@@ -1,0 +1,44 @@
+---
+import { site, services, products, offices } from '../data/site';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark blueprint">
+  <div class="wrap footer-top">
+    <a href="/" class="footer-logo" aria-label="Ignis Vortex home"><img src="/assets/logo-reversed.webp" width="640" height="138" alt="Ignis Vortex" loading="lazy" /></a>
+    <p class="footer-tag display">Code <span>·</span> Compliance <span>·</span> Safety <span>·</span> Solutions</p>
+  </div>
+  <div class="wrap footer-grid">
+    <div class="footer-about">
+      <p>Independent fire protection, life safety and civil engineering consultancy — with fire safety products, installation and commissioning support — across Saudi Arabia, the GCC, India and North America.</p>
+      <p class="legal mono">{site.legal}</p>
+      <div class="footer-social">
+        <a href={site.facebook} target="_blank" rel="noopener noreferrer" aria-label="Ignis Vortex on Facebook (opens in a new tab)"><Icon name="facebook" size={20} /></a>
+        <a href={`mailto:${site.email}`} aria-label={`Email ${site.email}`}><Icon name="mail" size={20} /></a>
+      </div>
+    </div>
+    <div>
+      <h2 class="footer-h">Practice areas</h2>
+      <ul class="footer-links">{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Products</h2>
+      <ul class="footer-links">{products.map((p) => <li><a href={`/products/${p.slug}/`}>{p.title}</a></li>)}</ul>
+      <h2 class="footer-h footer-h-gap">Company</h2>
+      <ul class="footer-links">
+        <li><a href="/about/">About</a></li><li><a href="/leadership/">Leadership</a></li><li><a href="/sectors/">Sectors</a></li>
+        <li><a href="/training/">Training Academy</a></li><li><a href="/resources/">Resources</a></li><li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Contact</h2>
+      <a class="footer-mail" href={`mailto:${site.email}`}><Icon name="mail" size={18} /><span>{site.email}</span></a>
+      <ul class="footer-offices">{offices.map((o) => <li><Icon name={o.icon} size={18} /><span><strong>{o.title}</strong>{o.text}</span></li>)}</ul>
+      <a class="btn btn-sm" href="/request-review/"><span>Request a Review</span><Icon name="arrow" size={16} /></a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© {year} Ignis Vortex · {site.legal}. All rights reserved.</p>
+    <nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms of use</a><a href="/sitemap.xml">Sitemap</a></nav>
+  </div>
+</footer>

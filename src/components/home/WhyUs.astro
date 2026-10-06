@@ -1,0 +1,27 @@
+---
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import { reasons } from '../../data/site';
+---
+<section class="section why white">
+  <div class="wrap why-grid">
+    <div class="why-sticky">
+      <p class="label reveal">Why clients partner with us</p>
+      <h2 class="reveal" style="--d:80ms">Engineering expertise. <em>Real-world impact.</em></h2>
+      <p class="lead reveal" style="--d:160ms">Technical code enforcement integrated with commercial awareness. By identifying safety and structural risks during early design phases, we help eliminate costly re-work, resolve non-conformance reports and work toward zero-defect handovers to approving authorities.</p>
+      <div class="reveal" style="--d:220ms"><Button href="/about/">Learn More About Us</Button></div>
+    </div>
+    <ol class="why-list">
+      {reasons.map((r, i) => (
+        <li class="why-item reveal from-right" style={`--d:${i * 90}ms`}>
+          <span class="why-n display">0{i + 1}</span>
+          <div class="why-icon"><Icon name={r.icon} size={30} /></div>
+          <div>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

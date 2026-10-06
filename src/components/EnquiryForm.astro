@@ -1,0 +1,114 @@
+---
+import { services, site, offices } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { review?: boolean; }
+const { review = false } = Astro.props;
+const options = [...services.map((s) => s.title), 'Plan Review', 'Life Safety Audit', 'Civil / Structural Review', 'Product Enquiry', 'Supply & Installation', 'Training', 'Other'];
+const projectTypes = ['Oil & Gas / Industrial', 'Hospitality / Master Development', 'High-Rise / Residential', 'Infrastructure', 'Commercial', 'Training / Product Enquiry', 'Other'];
+const stages = ['Concept / Feasibility', 'Design Development', 'Authority Submission', 'Construction', 'Testing / Handover', 'Existing Building / Audit', 'Not applicable'];
+---
+<section class="section enquiry">
+  <div class="wrap enquiry-grid">
+    <aside class="enquiry-aside">
+      <p class="label">Let’s talk engineering</p>
+      <h2>A clear brief. <em>A considered response.</em></h2>
+      <p class="lead">Tell us about your project, its location and the support you need — engineering, products, installation or training. We’ll help define an appropriate technical scope.</p>
+      <a class="enquiry-mail" href={`mailto:${site.email}`}><Icon name="mail" size={22} /><span><small class="mono">Email directly</small>{site.email}</span></a>
+      <ul class="office-list">
+        {offices.map((o) => <li><Icon name={o.icon} size={22} /><div><h3>{o.title}</h3><p>{o.text}</p></div></li>)}
+      </ul>
+      <a href={site.facebook} target="_blank" rel="noopener noreferrer" class="link-arrow">Find us on Facebook<Icon name="arrow-up-right" size={18} /></a>
+    </aside>
+    <div class="form-panel corners">
+      <p class="label plain">{review ? 'Technical review request' : 'Project enquiry'}</p>
+      <h2 class="form-title">{review ? 'Request a Technical Review' : 'Start a Conversation'}</h2>
+      <p class="form-intro">Complete the brief to prepare an email to our engineering team. Fields marked * are required.</p>
+      <form id="enquiry-form" data-recipient={site.email} novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="name">Full name <span>*</span></label><input id="name" name="name" autocomplete="name" required maxlength="120" /></div>
+          <div class="field"><label for="company">Company <span>*</span></label><input id="company" name="company" autocomplete="organization" required maxlength="160" /></div>
+          <div class="field"><label for="email">Email address <span>*</span></label><input id="email" type="email" name="email" autocomplete="email" required maxlength="180" /></div>
+          <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" name="phone" autocomplete="tel" maxlength="40" /></div>
+          <div class="field"><label for="country">Country <span>*</span></label><input id="country" name="country" autocomplete="country-name" required maxlength="100" /></div>
+          <div class="field"><label for="location">Project location</label><input id="location" name="location" maxlength="200" /></div>
+          <div class="field"><label for="service">Service required <span>*</span></label><select id="service" name="service" required><option value="">Select a service</option>{options.map((o) => <option value={o}>{o}</option>)}</select></div>
+          <div class="field"><label for="projectType">Project type <span>*</span></label><select id="projectType" name="projectType" required><option value="">Select a project type</option>{projectTypes.map((o) => <option>{o}</option>)}</select></div>
+          <div class="field full"><label for="stage">Project stage</label><select id="stage" name="stage"><option value="">Select the current stage</option>{stages.map((o) => <option>{o}</option>)}</select></div>
+          <div class="field full"><label for="message">Project brief <span>*</span></label><textarea id="message" name="message" rows="6" required minlength="20" maxlength="5000" placeholder="Describe your project, technical requirements, equipment needs and any key constraints."></textarea></div>
+          <div class="field honeypot" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        </div>
+        <p class="privacy-note">Your details are used only to prepare your enquiry. This website does not store or send the form — you review the email before sending it. <a href="/privacy/">Privacy information</a>.</p>
+        <button type="submit" class="btn" id="prepare-email"><span>Prepare Email Enquiry</span><Icon name="arrow" size={18} /></button>
+        <p class="form-status" role="status" aria-live="polite" id="form-status"></p>
+        <noscript><p>To enquire, please email <a href={`mailto:${site.email}`}>{site.email}</a> with your project location, required service and brief.</p></noscript>
+      </form>
+      <section class="draft-panel" id="draft-panel" hidden aria-label="Prepared email enquiry">
+        <h3>Your enquiry is ready to review</h3>
+        <p>Nothing has been sent. Open this draft in your email application, or copy it into an email to {site.email}.</p>
+        <label for="draft-text">Email draft</label>
+        <textarea id="draft-text" readonly rows="12"></textarea>
+        <div class="btn-row">
+          <a id="open-email" class="btn" href={`mailto:${site.email}`}><span>Open Email Draft</span><Icon name="arrow" size={18} /></a>
+          <button class="btn btn-outline" type="button" id="copy-draft"><span>Copy Enquiry</span><Icon name="document" size={18} /></button>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#enquiry-form');
+  const serviceSelect = document.querySelector<HTMLSelectElement>('#service');
+  const status = document.querySelector<HTMLElement>('#form-status');
+  const panel = document.querySelector<HTMLElement>('#draft-panel');
+  const requested = new URLSearchParams(location.search).get('service');
+
+  // Prefill from CTA links (?service=…). Only known option values are selected; free text is never injected as HTML.
+  if (requested && serviceSelect) {
+    const match = Array.from(serviceSelect.options).find((o) => o.value === requested);
+    if (match) serviceSelect.value = requested;
+    else if (requested.startsWith('Product: ')) serviceSelect.value = 'Product Enquiry';
+    else if (requested.startsWith('Training: ')) serviceSelect.value = 'Training';
+    const message = document.querySelector<HTMLTextAreaElement>('#message');
+    if (message && /^(Product|Training): /.test(requested)) message.value = `I would like more information about ${requested.split(': ').slice(1).join(': ')}. `;
+  }
+
+  form?.addEventListener('input', (event) => {
+    (event.target as HTMLElement).closest('.field')?.classList.remove('invalid');
+    if (panel && !panel.hidden) { panel.hidden = true; if (status) status.textContent = 'Details changed. Prepare a new email draft to include your changes.'; }
+  });
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const invalid = Array.from(form.querySelectorAll<HTMLInputElement>('input, select, textarea')).filter((el) => !el.checkValidity());
+    form.querySelectorAll('.field').forEach((f) => f.classList.remove('invalid'));
+    if (invalid.length) {
+      invalid.forEach((el) => el.closest('.field')?.classList.add('invalid'));
+      if (status) status.textContent = `Please complete ${invalid.length} highlighted field${invalid.length > 1 ? 's' : ''}.`;
+      invalid[0].focus();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get('website')) return;
+    const value = (key: string): string => String(data.get(key) || 'Not specified').trim();
+    const subject = `Technical enquiry: ${value('service')}`;
+    const content = [
+      'Hello Ignis Vortex,', '', 'I would like to discuss the following enquiry.', '',
+      `Name: ${value('name')}`, `Company: ${value('company')}`, `Email: ${value('email')}`, `Phone: ${value('phone')}`,
+      `Country: ${value('country')}`, `Project location: ${value('location')}`, `Service: ${value('service')}`,
+      `Project type: ${value('projectType')}`, `Project stage: ${value('stage')}`,
+      ...(requested ? [`Enquiry interest: ${requested}`] : []),
+      '', 'Project brief:', value('message'), '', 'Regards,', value('name'),
+    ].join('\n');
+    document.querySelector<HTMLTextAreaElement>('#draft-text')!.value = `Subject: ${subject}\n\n${content}`;
+    document.querySelector<HTMLAnchorElement>('#open-email')!.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+    if (panel) panel.hidden = false;
+    if (status) status.textContent = 'Email draft prepared. Review the details below; nothing has been sent.';
+    panel?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  });
+
+  document.querySelector('#copy-draft')?.addEventListener('click', async () => {
+    const draft = document.querySelector<HTMLTextAreaElement>('#draft-text')!;
+    try { await navigator.clipboard.writeText(draft.value); if (status) status.textContent = 'Enquiry copied. Paste it into your email application.'; }
+    catch { draft.focus(); draft.select(); if (status) status.textContent = 'Select and copy the draft from the text box.'; }
+  });
+</script>

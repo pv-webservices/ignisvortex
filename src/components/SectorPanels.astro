@@ -1,0 +1,22 @@
+---
+// Expanding sector panels on wide screens (hover or keyboard focus); stacked cards on smaller screens.
+import Icon from './Icon.astro';
+import Img from './Img.astro';
+import { sectors } from '../data/site';
+---
+<ul class="panels">
+  {sectors.map((s, i) => (
+    <li class="panel">
+      <a href={`/sectors/${s.slug}/`} class="panel-link">
+        <span class="panel-media"><Img src={s.image} alt="" sizes="(max-width: 900px) 100vw, 50vw" /></span>
+        <span class="panel-content">
+          <span class="panel-n mono">0{i + 1} / Sector</span>
+          <span class="panel-stat"><strong class="display">{s.stat}</strong><span class="mono">{s.statLabel}</span></span>
+          <strong class="panel-title display">{s.title}</strong>
+          <span class="panel-text">{s.short}</span>
+          <span class="panel-cta">Explore sector <Icon name="arrow" size={18} /></span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

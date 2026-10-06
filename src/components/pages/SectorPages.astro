@@ -1,0 +1,65 @@
+---
+import SectionHead from '../SectionHead.astro';
+import Card from '../Card.astro';
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import Img from '../Img.astro';
+import { sectors, services } from '../../data/site';
+interface Props { path: string; sector?: (typeof sectors)[number]; }
+const { path, sector } = Astro.props;
+---
+{path === 'sectors' && (
+  <section class="section">
+    <div class="wrap">
+      {sectors.map((s, i) => (
+        <article class:list={['story', { reverse: i % 2 === 1 }]}>
+          <div class="story-media media corners reveal clip"><Img src={s.image} alt="" sizes="(max-width: 900px) 100vw, 55vw" /><span class="story-tag mono">0{i + 1} / Sector expertise</span></div>
+          <div class="story-copy">
+            <p class="label reveal">Engineering in context</p>
+            <h2 class="reveal" style="--d:80ms">{s.title}</h2>
+            <p class="reveal" style="--d:140ms">{s.intro}</p>
+            <div class="story-stat reveal" style="--d:180ms"><strong class="display">{s.stat}</strong><span>{s.experience}</span></div>
+            <div class="reveal" style="--d:220ms"><Button href={`/sectors/${s.slug}/`} variant="outline">Explore This Sector</Button></div>
+          </div>
+        </article>
+      ))}
+      <p class="note">Experience reflects the principal engineer’s professional background. Photography illustrates the sector and does not depict completed Ignis Vortex projects.</p>
+    </div>
+  </section>
+)}
+{sector && (
+  <>
+    <section class="section">
+      <div class="wrap detail-grid">
+        <div class="detail-main">
+          <SectionHead label="The engineering challenge" title="Connecting safety <em>with delivery.</em>" />
+          <ol class="scope-list">
+            {sector.challenges.map((c, i) => <li class="reveal" style={`--d:${i * 70}ms`}><span class="mono">0{i + 1}</span><p>{c}</p><Icon name="check" size={22} /></li>)}
+          </ol>
+          <div class="deliverables dark blueprint reveal">
+            <p class="label">Relevant professional experience</p>
+            <p class="experience-stat display">{sector.stat}<span class="mono">{sector.statLabel}</span></p>
+            <p>{sector.experience}</p>
+            <p class="note">This experience relates to the principal engineer’s professional background.</p>
+          </div>
+        </div>
+        <aside class="detail-aside">
+          <div class="aside-card">
+            <p class="label plain">Project-specific support</p>
+            <p>Applicable codes, owner requirements and authority criteria vary by location and development type. We establish the review basis with your team.</p>
+            <Button href="/request-review/">Discuss Your Project</Button>
+            <a class="link-arrow" href="/sectors/">All sectors<Icon name="arrow" size={18} /></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <section class="section paper-2">
+      <div class="wrap">
+        <SectionHead label="Relevant capabilities" title="Expertise for <em>this environment.</em>" />
+        <div class="card-grid">
+          {services.filter((s) => sector.related.includes(s.slug)).map((s, i) => <Card href={`/services/${s.slug}/`} image={s.image} title={s.title} text={s.short} icon={s.icon} cta="Explore service" delay={i * 80} />)}
+        </div>
+      </div>
+    </section>
+  </>
+)}

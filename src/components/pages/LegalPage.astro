@@ -1,0 +1,29 @@
+---
+import { site } from '../../data/site';
+interface Props { path: string; }
+const { path } = Astro.props;
+const mail = `<a href="mailto:${site.email}">${site.email}</a>`;
+const content: Record<string, [string, string][]> = {
+  privacy: [
+    ['Enquiry information', 'The enquiry form prepares a draft in your browser. Entered information is not submitted to a website backend or stored by this form. Selecting “Open Email Draft” opens your email application; you choose whether to send the email.'],
+    ['Email correspondence', 'If you send an email, the recipient receives the details you choose to include. Avoid sending confidential project documents before agreeing an appropriate method of exchange with the team.'],
+    ['External links', 'Facebook and other external destinations operate under their own policies. Following an external link may share connection information with that service.'],
+    ['Website storage', 'This site does not use analytics, advertising cookies, user accounts or tracking scripts. A session-only browser flag is used to show the brief loading screen once per visit. The hosting provider may process ordinary access logs when serving the website.'],
+    ['Contact', `For questions about information you have shared, email ${mail}.`],
+  ],
+  terms: [
+    ['General information', `The content on this website introduces the services and capabilities of ${site.legal}. It is general information and does not replace a project-specific engineering assessment.`],
+    ['Technical services', 'Service scope, applicable jurisdictions, deliverables, fees and timing are confirmed separately. Website enquiries do not constitute a professional engagement or an approval of a design.'],
+    ['Products, installation & training', 'Product images are representative of each category. Brands, specifications, configurations, installation scope and availability are confirmed on enquiry. Training programmes support examination preparation; certification is awarded by the relevant certification body.'],
+    ['Images & demonstrations', 'Industry photography and illustrative imagery provide context and do not represent completed Ignis Vortex projects. Modelling demonstrations are explanatory and do not establish performance for another building or design.'],
+    ['Contact', `Please contact ${mail} with questions about services or website content.`],
+  ],
+};
+---
+<section class="section">
+  <div class="wrap-narrow prose">
+    {(content[path] ?? []).map(([h, p], i) => (
+      <div class="prose-item"><span class="mono">{String(i + 1).padStart(2, '0')}</span><div><h2>{h}</h2><p set:html={p} /></div></div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import CodeMarquee from '../components/home/CodeMarquee.astro';
+import Pillars from '../components/home/Pillars.astro';
+import WhyUs from '../components/home/WhyUs.astro';
+import Intelligence from '../components/home/Intelligence.astro';
+import Academy from '../components/home/Academy.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ServiceExplorer from '../components/ServiceExplorer.astro';
+import ProductRail from '../components/ProductRail.astro';
+import Delivery from '../components/Delivery.astro';
+import SectorPanels from '../components/SectorPanels.astro';
+import LeaderPanel from '../components/LeaderPanel.astro';
+import Button from '../components/Button.astro';
+import CTA from '../components/CTA.astro';
+---
+<Layout title="Fire Protection, Life Safety & Civil Engineering" description="Code-led fire protection, life safety and civil engineering consultancy with fire safety products and installation across Saudi Arabia, the GCC, India and North America." preload="gen/hero-pump-room">
+  <Hero />
+  <CodeMarquee />
+  <Pillars />
+  <WhyUs />
+
+  <section class="section paper-2">
+    <div class="wrap">
+      <SectionHead label="Practice areas & services" title="Integrated expertise. <em>Every stage of your project.</em>" text="From concept to commissioning — consultancy, technical review and engineering solutions across fire & life safety, technical advisory and civil & structural engineering." split>
+        <Button href="/services/" variant="outline">All Practice Areas</Button>
+      </SectionHead>
+      <ServiceExplorer />
+    </div>
+  </section>
+
+  <Intelligence />
+
+  <section class="section products-home">
+    <div class="wrap">
+      <SectionHead label="Products & appliances" title="Complete range of <em>fire safety &amp; security solutions.</em>" text="Fire alarm, suppression, detection, emergency and security systems — specified against your building’s hazards and code requirements, then supplied and installed." split>
+        <Button href="/products/">Explore Products</Button>
+      </SectionHead>
+    </div>
+    <div class="wrap-rail"><ProductRail /></div>
+  </section>
+
+  <Delivery />
+
+  <section class="section white">
+    <div class="wrap">
+      <SectionHead label="Sector experience" title="Delivering for complex <em>and iconic developments.</em>" text="Experience across industrial giga-compounds, luxury hospitality, high-rise towers and specialised infrastructure." split>
+        <Button href="/sectors/" variant="outline">All Sectors</Button>
+      </SectionHead>
+      <SectorPanels />
+      <p class="note sector-note">Sector experience reflects the principal engineer’s professional background. Photography is contextual and does not depict completed Ignis Vortex projects.</p>
+    </div>
+  </section>
+
+  <section class="section paper-2">
+    <div class="wrap">
+      <SectionHead label="Our leadership" title="Technical depth. <em>Global perspective.</em>" text="Academic excellence, professional certifications and international project delivery in fire protection, life safety and civil engineering." split />
+      <LeaderPanel />
+    </div>
+  </section>
+
+  <Academy />
+  <CTA />
+</Layout>

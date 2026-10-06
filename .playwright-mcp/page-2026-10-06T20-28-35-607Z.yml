@@ -1,0 +1,350 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Ignis Vortex home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Ignis Vortex" [ref=e6]
+      - button "Open navigation" [ref=e7] [cursor=pointer]
+  - main [ref=e10]:
+    - generic [ref=e11]:
+      - img "Engineer reviewing plans overlooking a construction site; contextual illustration" [ref=e12]
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - paragraph [ref=e17]:
+            - text: Safer people
+            - generic [ref=e18]: /
+            - text: Safer buildings
+            - generic [ref=e19]: /
+            - text: Stronger communities
+          - heading [level=1] [ref=e20]:
+            - text: Code-Led Fire Protection,
+            - emphasis [ref=e21]: Life Safety & Civil
+            - text: Engineering Consultancy.
+          - paragraph [ref=e22]: Bridging complex technical design, international code compliance, and executive project delivery across Saudi Arabia, the GCC, India, and North America.
+          - generic [ref=e23]:
+            - link "Request Technical Review / Audit" [ref=e24] [cursor=pointer]:
+              - /url: /request-review/
+            - link "Explore Practice Areas" [ref=e27] [cursor=pointer]:
+              - /url: /services/
+          - generic [ref=e30]:
+            - generic [ref=e31]: Fire SafetyEngineering
+            - generic [ref=e34]: Life Safety& Security
+            - generic [ref=e37]: Code Compliance& Plan Review
+            - generic [ref=e40]: Products& Appliances
+        - generic [aria-hidden] [ref=e43]: PLAN REVIEW COMPLIANCE ENGINEERING SAFETY SOLUTIONS
+      - generic [aria-hidden] [ref=e45]: ENGINEERING WITH PURPOSE / 01
+    - region "Our credentials" [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e51]:
+          - heading "Dual PE Licensure" [level=2] [ref=e52]
+          - paragraph [ref=e53]: Fire Protection & Civil Engineering
+        - generic [ref=e58]:
+          - heading "10+ Years Experience" [level=2] [ref=e59]
+          - paragraph [ref=e60]: Engineering & project delivery
+        - generic [ref=e65]:
+          - heading "4 International Jurisdictions" [level=2] [ref=e66]
+          - paragraph [ref=e67]: Saudi Arabia · UAE · India · USA
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - paragraph [ref=e72]: Why clients partner with us
+        - heading [level=2] [ref=e74]:
+          - text: Engineering expertise.
+          - emphasis [ref=e75]: Real-world impact.
+        - paragraph [ref=e76]: Technical knowledge, code mastery and practical project experience. A considered approach to safer, compliant and constructible developments.
+        - link "Discover Ignis Vortex" [ref=e77] [cursor=pointer]:
+          - /url: /about/
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - heading "Multi-Jurisdictional Code Mastery" [level=3] [ref=e84]
+          - paragraph [ref=e86]: Global and regional codes, interpreted in the context of your project.
+        - generic [ref=e87]:
+          - heading "Software-Driven Engineering" [level=3] [ref=e90]
+          - paragraph [ref=e92]: Advanced analysis and simulation to inform design and resolve coordination issues.
+        - generic [ref=e93]:
+          - heading "Owner’s Engineering & Authority Liaison" [level=3] [ref=e96]
+          - paragraph [ref=e98]: Independent technical representation from design review through to handover.
+    - region "Codes and standards" [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]: InternationalCodes & Standards
+        - generic [ref=e104]:
+          - strong [ref=e105]: NFPA
+          - generic [ref=e106]: Fire & life safety codes
+        - generic [ref=e107]:
+          - strong [ref=e108]: SAES
+          - generic [ref=e109]: Saudi Aramco Engineering Standards
+        - generic [ref=e110]:
+          - strong [ref=e111]: SBC 801
+          - generic [ref=e112]: Saudi Fire Protection Code
+        - generic [ref=e113]:
+          - strong [ref=e114]: UAE
+          - generic [ref=e115]: Fire & Life Safety Code
+        - generic [ref=e116]:
+          - strong [ref=e117]: NBC 2016
+          - generic [ref=e118]: Part 4 · Fire & Life Safety
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - paragraph [ref=e123]: Our practice areas
+          - heading "Integrated expertise. Every stage of your project." [level=2] [ref=e125]
+          - paragraph [ref=e126]: From concept to commissioning, engineering and independent review built around your project.
+        - link "All practice areas" [ref=e127] [cursor=pointer]:
+          - /url: /services/
+      - generic [ref=e130]:
+        - link "Fire Protection Engineering Performance-based design. Engineered for the real world. Explore service" [ref=e131] [cursor=pointer]:
+          - /url: /services/fire-protection-engineering/
+          - generic [ref=e133]:
+            - heading "Fire Protection Engineering" [level=3] [ref=e137]
+            - paragraph [ref=e138]: Performance-based design. Engineered for the real world.
+            - generic [ref=e139]: Explore service
+        - link "Code Consulting & Life Safety Audits Clear code interpretation. Safer, compliant buildings. Explore service" [ref=e142] [cursor=pointer]:
+          - /url: /services/code-consulting/
+          - generic [ref=e144]:
+            - heading "Code Consulting & Life Safety Audits" [level=3] [ref=e148]
+            - paragraph [ref=e149]: Clear code interpretation. Safer, compliant buildings.
+            - generic [ref=e150]: Explore service
+        - link "Passive Fire Protection Review Protecting structural integrity and compartment boundaries. Explore service" [ref=e153] [cursor=pointer]:
+          - /url: /services/passive-fire-protection/
+          - generic [ref=e155]:
+            - heading "Passive Fire Protection Review" [level=3] [ref=e159]
+            - paragraph [ref=e160]: Protecting structural integrity and compartment boundaries.
+            - generic [ref=e161]: Explore service
+        - link "Third-Party Design Verification Independent scrutiny before authority submission. Explore service" [ref=e164] [cursor=pointer]:
+          - /url: /services/design-verification/
+          - generic [ref=e166]:
+            - heading "Third-Party Design Verification" [level=3] [ref=e170]
+            - paragraph [ref=e171]: Independent scrutiny before authority submission.
+            - generic [ref=e172]: Explore service
+        - link "Temporary Construction Facilities Review Life safety throughout the construction phase. Explore service" [ref=e175] [cursor=pointer]:
+          - /url: /services/temporary-construction-facilities/
+          - generic [ref=e177]:
+            - heading "Temporary Construction Facilities Review" [level=3] [ref=e181]
+            - paragraph [ref=e182]: Life safety throughout the construction phase.
+            - generic [ref=e183]: Explore service
+        - link "Testing, Commissioning & Handover From installed systems to verified performance. Explore service" [ref=e186] [cursor=pointer]:
+          - /url: /services/testing-commissioning/
+          - generic [ref=e188]:
+            - heading "Testing, Commissioning & Handover" [level=3] [ref=e192]
+            - paragraph [ref=e193]: From installed systems to verified performance.
+            - generic [ref=e194]: Explore service
+        - link "Civil & Structural Engineering Sound structures. Coordinated sites. Informed decisions. Explore service" [ref=e197] [cursor=pointer]:
+          - /url: /services/civil-structural/
+          - generic [ref=e199]:
+            - heading "Civil & Structural Engineering" [level=3] [ref=e203]
+            - paragraph [ref=e204]: Sound structures. Coordinated sites. Informed decisions.
+            - generic [ref=e205]: Explore service
+        - link "PE Stamp Services Professional engineering review in licensed U.S. jurisdictions. Explore service" [ref=e208] [cursor=pointer]:
+          - /url: /services/pe-stamp/
+          - generic [ref=e210]:
+            - heading "PE Stamp Services" [level=3] [ref=e214]
+            - paragraph [ref=e215]: Professional engineering review in licensed U.S. jurisdictions.
+            - generic [ref=e216]: Explore service
+        - link "ENGINEERING KNOWLEDGE Executive Training & Certification Academy Technical training and certification exam preparation. Explore training" [ref=e219] [cursor=pointer]:
+          - /url: /training/
+          - generic [ref=e220]: ENGINEERING KNOWLEDGE
+          - generic [ref=e222]:
+            - heading "Executive Training & Certification Academy" [level=3] [ref=e226]
+            - paragraph [ref=e227]: Technical training and certification exam preparation.
+            - generic [ref=e228]: Explore training
+    - generic [ref=e233]:
+      - generic [ref=e234]:
+        - paragraph [ref=e235]: Engineering intelligence
+        - heading [level=2] [ref=e237]:
+          - text: Precision in analysis.
+          - emphasis [ref=e238]: Confidence in design.
+        - paragraph [ref=e239]: Industry-leading analysis and simulation tools help us understand performance, resolve coordination issues and inform safer buildings.
+        - link "Our Technical Capabilities" [ref=e240] [cursor=pointer]:
+          - /url: /engineering-software/
+      - generic [ref=e243]:
+        - link "01 AutoSPRINK HydraCAD / HydraCalc 3D sprinkler layouts, pipe sizing and automated hydraulic calculations." [ref=e244] [cursor=pointer]:
+          - /url: /engineering-software/
+          - text: "01"
+          - heading "AutoSPRINK" [level=3] [ref=e247]
+          - generic [ref=e248]: HydraCAD / HydraCalc
+          - paragraph [ref=e250]: 3D sprinkler layouts, pipe sizing and automated hydraulic calculations.
+        - link "02 FDS / PyroSim Fire & smoke analysis Fire dynamics, smoke movement and tenability analysis for performance-based design." [ref=e251] [cursor=pointer]:
+          - /url: /engineering-software/
+          - text: "02"
+          - heading "FDS / PyroSim" [level=3] [ref=e254]
+          - generic [ref=e255]: Fire & smoke analysis
+          - paragraph [ref=e257]: Fire dynamics, smoke movement and tenability analysis for performance-based design.
+        - link "03 Pathfinder Occupant movement Egress time, exit capacity and evacuation bottleneck assessment." [ref=e258] [cursor=pointer]:
+          - /url: /engineering-software/
+          - text: "03"
+          - heading "Pathfinder" [level=3] [ref=e261]
+          - generic [ref=e262]: Occupant movement
+          - paragraph [ref=e264]: Egress time, exit capacity and evacuation bottleneck assessment.
+        - link "04 CONTAM Airflow & pressure Pressure distribution, stairwell pressurization and atrium smoke control." [ref=e265] [cursor=pointer]:
+          - /url: /engineering-software/
+          - text: "04"
+          - heading "CONTAM" [level=3] [ref=e268]
+          - generic [ref=e269]: Airflow & pressure
+          - paragraph [ref=e271]: Pressure distribution, stairwell pressurization and atrium smoke control.
+        - link "05 AutoCAD Procore / Bluebeam Coordinated drawings, IFC documentation, submittal reviews and markups." [ref=e272] [cursor=pointer]:
+          - /url: /engineering-software/
+          - text: "05"
+          - heading "AutoCAD" [level=3] [ref=e275]
+          - generic [ref=e276]: Procore / Bluebeam
+          - paragraph [ref=e278]: Coordinated drawings, IFC documentation, submittal reviews and markups.
+    - generic [ref=e280]:
+      - generic [ref=e281]:
+        - generic [ref=e282]:
+          - paragraph [ref=e283]: Products & appliances
+          - heading "Protection that works as a system." [level=2] [ref=e285]
+          - paragraph [ref=e286]: Fire safety and security solutions, considered in the context of your building.
+        - link "Explore Products" [ref=e287] [cursor=pointer]:
+          - /url: /products/
+      - generic [ref=e290]:
+        - link [ref=e291] [cursor=pointer]:
+          - /url: /products/fire-alarm-systems/
+          - generic [ref=e303]:
+            - heading "Fire Alarm Systems" [level=3] [ref=e307]
+            - paragraph [ref=e308]: Detection, notification and coordinated system interfaces.
+            - generic [ref=e309]: Explore category
+        - link [ref=e312] [cursor=pointer]:
+          - /url: /products/fire-extinguishers/
+          - generic [ref=e343]:
+            - heading "Fire Extinguishers" [level=3] [ref=e347]
+            - paragraph [ref=e348]: Portable fire protection matched to the hazard.
+            - generic [ref=e349]: Explore category
+        - link [ref=e352] [cursor=pointer]:
+          - /url: /products/sprinkler-hydrant/
+          - generic [ref=e364]:
+            - heading "Sprinkler & Hydrant Systems" [level=3] [ref=e368]
+            - paragraph [ref=e369]: Water-based protection, from supply to discharge.
+            - generic [ref=e370]: Explore category
+        - link [ref=e373] [cursor=pointer]:
+          - /url: /products/detection/
+          - generic [ref=e382]:
+            - heading "Smoke & Heat Detection" [level=3] [ref=e386]
+            - paragraph [ref=e387]: Early detection for the building environment.
+            - generic [ref=e388]: Explore category
+        - link [ref=e391] [cursor=pointer]:
+          - /url: /products/emergency-lighting/
+          - img [aria-hidden] [ref=e393]:
+            - generic [ref=e397]: EXIT
+          - generic [ref=e400]:
+            - heading "Emergency Lighting & Safety Equipment" [level=3] [ref=e404]
+            - paragraph [ref=e405]: Clear guidance along emergency escape routes.
+            - generic [ref=e406]: Explore category
+        - link [ref=e409] [cursor=pointer]:
+          - /url: /products/security-surveillance/
+          - generic [ref=e422]:
+            - heading "Security & Surveillance Solutions" [level=3] [ref=e426]
+            - paragraph [ref=e427]: CCTV and access control for coordinated building security.
+            - generic [ref=e428]: Explore category
+      - paragraph [ref=e431]: Illustrative categories. Product selection and technical information are confirmed for each enquiry.
+    - generic [ref=e433]:
+      - generic [ref=e434]:
+        - paragraph [ref=e435]: Sector experience
+        - heading "Complex environments. Considered solutions." [level=2] [ref=e437]
+        - paragraph [ref=e438]: Engineering insight across industrial developments, hospitality, high-rise buildings and infrastructure.
+      - generic [ref=e439]:
+        - link "Oil & Gas / Giga-Compound Developments Complex industrial environments and large residential compounds. Explore sector" [ref=e440] [cursor=pointer]:
+          - /url: /sectors/oil-gas/
+          - generic [ref=e442]:
+            - heading "Oil & Gas / Giga-Compound Developments" [level=3] [ref=e446]
+            - paragraph [ref=e447]: Complex industrial environments and large residential compounds.
+            - generic [ref=e448]: Explore sector
+        - link "Luxury Hospitality & Master Developments Life safety for exceptional guest environments. Explore sector" [ref=e451] [cursor=pointer]:
+          - /url: /sectors/hospitality/
+          - generic [ref=e453]:
+            - heading "Luxury Hospitality & Master Developments" [level=3] [ref=e457]
+            - paragraph [ref=e458]: Life safety for exceptional guest environments.
+            - generic [ref=e459]: Explore sector
+        - link "High-Rise Residential & Commercial Towers A coordinated strategy for vertical communities. Explore sector" [ref=e462] [cursor=pointer]:
+          - /url: /sectors/high-rise/
+          - generic [ref=e464]:
+            - heading "High-Rise Residential & Commercial Towers" [level=3] [ref=e468]
+            - paragraph [ref=e469]: A coordinated strategy for vertical communities.
+            - generic [ref=e470]: Explore sector
+        - link "Specialized Infrastructure & Industrial Facilities Engineering for demanding, specialized environments. Explore sector" [ref=e473] [cursor=pointer]:
+          - /url: /sectors/infrastructure/
+          - generic [ref=e475]:
+            - heading "Specialized Infrastructure & Industrial Facilities" [level=3] [ref=e479]
+            - paragraph [ref=e480]: Engineering for demanding, specialized environments.
+            - generic [ref=e481]: Explore sector
+      - paragraph [ref=e484]: Sector imagery is contextual. Experience reflects the principal engineer’s professional background.
+    - generic [ref=e486]:
+      - generic [ref=e487]:
+        - paragraph [ref=e488]: Our leadership
+        - heading [level=2] [ref=e490]:
+          - text: Technical depth.
+          - emphasis [ref=e491]: Global perspective.
+        - paragraph [ref=e492]: Academic expertise, professional credentials and international project delivery experience inform our engineering approach.
+        - link "Meet our principal engineer" [ref=e493] [cursor=pointer]:
+          - /url: /leadership/
+      - generic [ref=e496]:
+        - generic [ref=e497]: PRINCIPAL ENGINEER & MANAGING DIRECTOR
+        - heading "M. Waseem Mehdi, P.E., FICE" [level=3] [ref=e498]
+        - list [ref=e499]:
+          - listitem [ref=e500]: PhD Candidate in Fire Protection Engineering
+          - listitem [ref=e503]: M.Tech in Structural Engineering
+          - listitem [ref=e506]: B.Tech · Indian Institute of Technology, Kanpur
+          - listitem [ref=e509]: Harvard Business School CORe
+          - listitem [ref=e512]: CFPS · CFPE · CWBSP · CHRS · PMP
+          - listitem [ref=e515]: Fellow of the Institution of Civil Engineers (FICE), UK
+    - generic [ref=e519]:
+      - generic [ref=e520]:
+        - paragraph [ref=e521]: Ready to discuss your project?
+        - heading "Let’s engineer a safer outcome." [level=2] [ref=e522]
+        - paragraph [ref=e523]: Technical clarity. Code-led design. A considered next step.
+      - link "Request a Technical Review" [ref=e524] [cursor=pointer]:
+        - /url: /request-review/
+  - contentinfo [ref=e527]:
+    - generic [ref=e528]:
+      - generic [ref=e529]:
+        - link [ref=e530] [cursor=pointer]:
+          - /url: /
+          - img "Ignis Vortex" [ref=e531]
+        - paragraph [ref=e532]: Code · Compliance · Safety · Solutions
+        - paragraph [ref=e533]: Independent engineering.A safer built environment.
+        - paragraph [ref=e534]: Ignis Code & Plan Review Services LLC
+      - generic [ref=e535]:
+        - heading "Explore" [level=2] [ref=e536]
+        - generic [ref=e537]:
+          - link "About" [ref=e538] [cursor=pointer]:
+            - /url: /about/
+          - link "Services" [ref=e539] [cursor=pointer]:
+            - /url: /services/
+          - link "Products" [ref=e540] [cursor=pointer]:
+            - /url: /products/
+          - link "Sectors" [ref=e541] [cursor=pointer]:
+            - /url: /sectors/
+          - link "Training" [ref=e542] [cursor=pointer]:
+            - /url: /training/
+          - link "Resources" [ref=e543] [cursor=pointer]:
+            - /url: /resources/
+          - link "Contact" [ref=e544] [cursor=pointer]:
+            - /url: /contact/
+          - link "Leadership" [ref=e545] [cursor=pointer]:
+            - /url: /leadership/
+      - generic [ref=e546]:
+        - heading "Contact information" [level=2] [ref=e547]
+        - link "waseem@ignisplanreview.com" [ref=e548] [cursor=pointer]:
+          - /url: mailto:waseem@ignisplanreview.com
+        - link "www.ignis-vortex.com" [ref=e552] [cursor=pointer]:
+          - /url: /contact/
+        - paragraph [ref=e556]:
+          - generic [ref=e559]: Riyadh, Kingdom of Saudi Arabia
+        - paragraph [ref=e560]:
+          - generic [ref=e563]: India Operations
+        - paragraph [ref=e564]:
+          - generic [ref=e567]: U.S. Licensing Footprint
+      - generic [ref=e568]:
+        - heading "Follow us" [level=2] [ref=e569]
+        - link "Ignis Vortex on Facebook (opens in a new tab)" [ref=e570] [cursor=pointer]:
+          - /url: https://www.facebook.com/share/r/1GyjVFYP7A/
+          - generic [aria-hidden] [ref=e571]: f
+        - link "Start a conversation" [ref=e572] [cursor=pointer]:
+          - /url: /request-review/
+    - generic [ref=e575]:
+      - paragraph [ref=e576]: © 2026 Ignis Vortex. All rights reserved.
+      - generic [ref=e577]:
+        - link "Privacy" [ref=e578] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Terms of use" [ref=e579] [cursor=pointer]:
+          - /url: /terms/
+        - link "Sitemap" [ref=e580] [cursor=pointer]:
+          - /url: /sitemap.xml

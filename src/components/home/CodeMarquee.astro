@@ -1,0 +1,14 @@
+---
+import { standards } from '../../data/site';
+// Duplicated track for a seamless loop; the copy is hidden from assistive tech.
+---
+<section class="marquee" aria-label="International codes and standards">
+  <p class="marquee-label mono">International codes<br />&amp; standards</p>
+  <div class="marquee-viewport">
+    <ul class="marquee-track">
+      {[0, 1].map((copy) => standards.map(([name, text]) => (
+        <li aria-hidden={copy === 1 ? 'true' : undefined}><strong class="display">{name}</strong><span>{text}</span></li>
+      )))}
+    </ul>
+  </div>
+</section>

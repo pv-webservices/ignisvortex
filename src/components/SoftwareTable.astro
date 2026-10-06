@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { software } from '../data/site';
+interface Props { light?: boolean; }
+const { light = false } = Astro.props;
+---
+<div class:list={['spec-table', { light }]} role="table" aria-label="Software-driven fire protection design and modelling">
+  <div class="spec-row spec-head" role="row">
+    <span role="columnheader">Software package</span>
+    <span role="columnheader">Technical application</span>
+    <span role="columnheader">Delivered outputs</span>
+  </div>
+  {software.map((s, i) => (
+    <div class="spec-row reveal" role="row" style={`--d:${i * 70}ms`}>
+      <span role="cell" class="spec-name">
+        <span class="spec-icon"><Icon name={s.icon} size={24} /></span>
+        <span><strong>{s.name}</strong><small class="mono">{s.companion}</small></span>
+      </span>
+      <span role="cell"><small class="spec-mobile-label mono">Application</small>{s.text}</span>
+      <span role="cell"><small class="spec-mobile-label mono">Outputs</small>{s.output}</span>
+    </div>
+  ))}
+</div>
